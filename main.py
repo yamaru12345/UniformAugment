@@ -63,5 +63,5 @@ log = train_model(args.model,
                   args.base_dir,
                   device=device)
 
-# Logging
+# Visualizing logs
 visualize_logs(log, Path(args.base_dir, f'train_log_{args.model}.png'))
