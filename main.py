@@ -31,9 +31,10 @@ args = parser.parse_args()
 size = 224
 mean = (0.485, 0.456, 0.406)
 std = (0.229, 0.224, 0.225)
-transform = ImageTransform(size, mean, std)
-trainset = torchvision.datasets.CIFAR10(root=args.base_dir, train=True, download=True, transform=transform)
+transform_train = ImageTransform(size, mean, std, train)
+transform_test = ImageTransform(size, mean, std, test)
+trainset = torchvision.datasets.CIFAR10(root=args.base_dir, train=True, download=True, transform=transform_train)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=32, shuffle=True, num_workers=args.num_workers)
 
-testset = torchvision.datasets.CIFAR10(root=root=args.base_dir, train=False, download=True, transform=transform)
+testset = torchvision.datasets.CIFAR10(root=root=args.base_dir, train=False, download=True, transform=transform_test)
 testloader = torch.utils.data.DataLoader(testset, batch_size=32, shuffle=False, num_workers=args.num_workers)
