@@ -1,6 +1,5 @@
 import time
 from pathlib import Path
-from tqdm import tqdm
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -57,7 +56,7 @@ def train_model(model_id, dataset_train, dataset_valid, batch_size, model, crite
 
     # set the train mode
     model.train()
-    for data in tqdm(dataloader_train):
+    for data in dataloader_train:
       # zero the parameter gradients
       optimizer.zero_grad()
 
@@ -96,7 +95,7 @@ def train_model(model_id, dataset_train, dataset_valid, batch_size, model, crite
     e_time = time.time()
 
     # print statistics
-    (f'epoch: {epoch + 1}, loss_train: {loss_train:.4f}, accuracy_train: {acc_train:.4f}, loss_valid: {loss_valid:.4f}, accuracy_valid: {acc_valid:.4f}, saved: {saved}, {(e_time - s_time):.4f}sec') 
+    print(f'epoch: {epoch + 1}, loss_train: {loss_train:.4f}, accuracy_train: {acc_train:.4f}, loss_valid: {loss_valid:.4f}, accuracy_valid: {acc_valid:.4f}, saved: {saved}, {(e_time - s_time):.4f}sec') 
       
     # set the scheduler
     #scheduler.step()
