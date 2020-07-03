@@ -14,8 +14,8 @@ def calculate_loss_and_accuracy(model, dataset, batch_size, device=None, criteri
   with torch.no_grad():
     for data in dataloader:
       # デバイスの指定
-      inputs = data['inputs'].to(device)
-      labels = data['labels'].to(device)
+      inputs = data[0].to(device)
+      labels = data[1].to(device)
 
       # 順伝播
       outputs = model.forward(inputs)
@@ -67,8 +67,8 @@ def train_model(model_id, dataset_train, dataset_valid, batch_size, model, crite
       optimizer.zero_grad()
 
       # 順伝播 + 誤差逆伝播 + 重み更新
-      inputs = data['inputs'].to(device)
-      labels = data['labels'].to(device)
+      inputs = data[0].to(device)
+      labels = data[1].to(device)
       outputs = model.forward(inputs)
       loss = criterion(outputs, labels)
       loss.backward()
