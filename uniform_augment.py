@@ -83,21 +83,21 @@ class UniformAugment():
   
   
 class ImageTransform():
-    def __init__(self, resize, mean, std):
-        self.data_transform = {
-            'train': transforms.Compose([
+    def __init__(self, resize, mean, std, phase):
+        if phase = 'train':
+            self.data_transform = transforms.Compose([
                 transforms.RandomResizedCrop(resize, scale=(0.5, 1.0)),
                 UniformAugment(),
                 transforms.RandomHorizontalFlip(),
                 transforms.ToTensor(),
                 transforms.Normalize(mean, std)
-            ]),
-            'val': transforms.Compose([
+            ])
+        else:
+            self.data_transform = transforms.Compose([
                 transforms.CenterCrop(resize),
                 transforms.ToTensor(),
                 transforms.Normalize(mean, std) 
             ])
-        }
 
-    def __call__(self, img, phase='train'):
-        return self.data_transform[phase](img=img)
+    def __call__(self, img):
+        return self.data_transform(img=img)
