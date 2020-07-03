@@ -1,27 +1,5 @@
 import numpy as np
 from matplotlib import pyplot as plt
-import torch
-from torch.utils.data import DataLoader
-
-
-def predict(model, dataset, batch_size, device=None):
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
-    pred = []
-    with torch.no_grad():
-        for data in dataloader:
-            # デバイスの指定
-            inputs = data['inputs'].to(device)
-            labels = data['labels'].to(device)
-
-            # 順伝播
-            outputs = model.forward(inputs)
-
-            # 予測値算出
-            pred.append(outputs)
-  
-    pred = torch.cat(pred)
-
-    return pred
 
 
 def visualize_logs(log, fig_path):
