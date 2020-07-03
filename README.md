@@ -7,4 +7,4 @@ Unofficial PyTorch implementation of [UniformAugment](https://arxiv.org/abs/2003
 python main.py './' 'VGG19'
 ```
 
-you can also just use ```IImageTransform``` class in uniform_augment.py in your dataset class.
+you can also just use ```ImageTransform``` class in uniform_augment.py in your dataset class.
