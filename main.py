@@ -36,15 +36,13 @@ dataset_train = torchvision.datasets.CIFAR10(root=args.base_dir, train=True, dow
 dataset_test = torchvision.datasets.CIFAR10(root=root=args.base_dir, train=False, download=True, transform=transform_test)
 
 # Setting parameters
-device = 'cuda' if cuda.is_available() else 'cpu'
-print(f'device: {device}')
 LEARNING_RATE = 1e-3
 BATCH_SIZE = 32
+device = 'cuda' if cuda.is_available() else 'cpu'
+print(f'device: {device}')
 
 # Loading pretrained model
-net = load_model(args.model, 8)
-if args.load_model:
-    net.load_state_dict(torch.load(Path(args.base_dir, f'state_dict_{args.model}.pt'), map_location=device))
+net = load_model(args.model, 10)
 
 # Defining loss function
 criterion = nn.CrossEntropyLoss()
@@ -53,20 +51,17 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=LEARNING_RATE, momentum=0.9)
 
 # Creating sampler
-if args.debug:
-    sampler = None
-else:
-    class_sample_count = np.array([len(np.where(train['gender_status'] == t)[0]) for t in np.unique(train['gender_status'])])
-    weight = 1. / class_sample_count
-    samples_weight = np.array([weight[t] for t in train['gender_status']])
-    sampler = sampler.WeightedRandomSampler(samples_weight, len(samples_weight))
+class_sample_count = np.array([len(np.where(train['gender_status'] == t)[0]) for t in np.unique(train['gender_status'])])
+weight = 1. / class_sample_count
+samples_weight = np.array([weight[t] for t in train['gender_status']])
+sampler = sampler.WeightedRandomSampler(samples_weight, len(samples_weight))
 
 # Training model
 torch.backends.cudnn.benchmark = True
 print(f'model: {args.model}')
 log = train_model(args.model,
                   dataset_train,
-                  dataset_valid,
+                  dataset_test,
                   BATCH_SIZE,
                   net,
                   criterion,
