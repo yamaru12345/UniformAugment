@@ -8,7 +8,6 @@ import torch
 from torch import optim
 from torch import nn
 from torch import cuda
-from torch.utils.data import sampler
 import torchvision
 
 from uniform_augment import ImageTransform
