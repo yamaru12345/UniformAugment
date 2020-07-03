@@ -9,7 +9,7 @@ from torch import optim
 from torch import nn
 from torch import cuda
 from torch.utils.data import sampler
-import torchvison
+import torchvision
 
 from uniform_augment import ImageTransform
 from model import load_model
