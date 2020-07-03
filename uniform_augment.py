@@ -83,8 +83,8 @@ class UniformAugment():
   
   
 class ImageTransform():
-    def __init__(self, resize, mean, std, phase):
-        if phase == 'train':
+    def __init__(self, resize, mean, std, train=True):
+        if train:
             self.data_transform = transforms.Compose([
                 transforms.RandomResizedCrop(resize, scale=(0.5, 1.0)),
                 UniformAugment(),
