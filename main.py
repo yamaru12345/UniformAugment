@@ -33,7 +33,7 @@ std = (0.229, 0.224, 0.225)
 transform_train = ImageTransform(size, mean, std, train=True)
 transform_test = ImageTransform(size, mean, std, train=False)
 dataset_train = torchvision.datasets.CIFAR10(root=args.base_dir, train=True, download=True, transform=transform_train)
-dataset_test = torchvision.datasets.CIFAR10(root=root=args.base_dir, train=False, download=True, transform=transform_test)
+dataset_test = torchvision.datasets.CIFAR10(root=args.base_dir, train=False, download=True, transform=transform_test)
 
 # Setting parameters
 LEARNING_RATE = 1e-3
