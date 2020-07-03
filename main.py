@@ -41,16 +41,16 @@ BATCH_SIZE = 32
 device = 'cuda' if cuda.is_available() else 'cpu'
 print(f'device: {device}')
 
-# Loading pretrained model
+# Loading a pretrained model
 net = load_model(args.model, 10)
 
-# Defining loss function
+# Defining a loss function
 criterion = nn.CrossEntropyLoss()
 
-# Defining optimizer
+# Defining an optimizer
 optimizer = optim.SGD(net.parameters(), lr=LEARNING_RATE, momentum=0.9)
 
-# Training model
+# Training the network
 torch.backends.cudnn.benchmark = True
 print(f'model: {args.model}')
 log = train_model(args.model,
