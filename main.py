@@ -50,12 +50,6 @@ criterion = nn.CrossEntropyLoss()
 # Defining optimizer
 optimizer = optim.SGD(net.parameters(), lr=LEARNING_RATE, momentum=0.9)
 
-# Creating sampler
-class_sample_count = np.array([len(np.where(train['gender_status'] == t)[0]) for t in np.unique(train['gender_status'])])
-weight = 1. / class_sample_count
-samples_weight = np.array([weight[t] for t in train['gender_status']])
-sampler = sampler.WeightedRandomSampler(samples_weight, len(samples_weight))
-
 # Training model
 torch.backends.cudnn.benchmark = True
 print(f'model: {args.model}')
@@ -68,7 +62,6 @@ log = train_model(args.model,
                   optimizer,
                   args.num_epochs,
                   args.base_dir,
-                  sampler=sampler,
                   device=device)
 
 # Logging
