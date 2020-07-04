@@ -27,9 +27,9 @@ parser.add_argument('--num_epochs', default=100, type=int)
 args = parser.parse_args()
 
 # Loading and normalizing CIFAR10
-size = 224
-mean = (0.485, 0.456, 0.406)
-std = (0.229, 0.224, 0.225)
+size = 32
+mean = (0.5, 0.5, 0.5)
+std = (0.5, 0.5, 0.5)
 transform_train = ImageTransform(size, mean, std, train=True)
 transform_test = ImageTransform(size, mean, std, train=False)
 dataset_train = torchvision.datasets.CIFAR10(root=args.base_dir, train=True, download=True, transform=transform_train)
