@@ -86,7 +86,7 @@ class ImageTransform():
     def __init__(self, resize, mean, std, train=True):
         if train:
             self.data_transform = transforms.Compose([
-                transforms.RandomResizedCrop(resize, scale=(0.5, 1.0)),
+                transforms.Resize(resize)
                 UniformAugment(),
                 transforms.RandomHorizontalFlip(),
                 transforms.ToTensor(),
@@ -94,7 +94,7 @@ class ImageTransform():
             ])
         else:
             self.data_transform = transforms.Compose([
-                transforms.CenterCrop(resize),
+                transforms.Resize(resize),
                 transforms.ToTensor(),
                 transforms.Normalize(mean, std) 
             ])
