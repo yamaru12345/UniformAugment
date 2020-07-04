@@ -24,6 +24,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('base_dir', type=str)
 parser.add_argument('model', type=str)
 parser.add_argument('--num_epochs', default=100, type=int)
+parser.add_argument('--early_stopping', action='store_true')
 args = parser.parse_args()
 
 # Loading and normalizing CIFAR10
@@ -62,7 +63,8 @@ log = train_model(args.model,
                   optimizer,
                   args.num_epochs,
                   args.base_dir,
-                  device=device)
+                  device=device,
+                  early_stopping=args.early_stopping)
 
 # Visualizing logs
 visualize_logs(log, Path(args.base_dir, f'train_log_{args.model}.png'))
