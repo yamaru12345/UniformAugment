@@ -24,7 +24,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument('base_dir', type=str)
 parser.add_argument('model', type=str)
 parser.add_argument('--num_epochs', default=100, type=int)
-parser.add_argument('--dataset', default='CIFAR10', type=str)
 args = parser.parse_args()
 
 # Loading and normalizing CIFAR10
@@ -33,12 +32,8 @@ mean = (0.485, 0.456, 0.406)
 std = (0.229, 0.224, 0.225)
 transform_train = ImageTransform(size, mean, std, train=True)
 transform_test = ImageTransform(size, mean, std, train=False)
-if args.dataset == 'CIFAR10':
-    dataset_train = torchvision.datasets.CIFAR10(root=args.base_dir, train=True, download=True, transform=transform_train)
-    dataset_test = torchvision.datasets.CIFAR10(root=args.base_dir, train=False, download=True, transform=transform_test)
-elif args.dataset == 'MNIST':
-    dataset_train = torchvision.datasets.MNIST(root=args.base_dir, train=True, download=True, transform=transform_train)
-    dataset_test = torchvision.datasets.MNIST(root=args.base_dir, train=False, download=True, transform=transform_test)
+dataset_train = torchvision.datasets.CIFAR10(root=args.base_dir, train=True, download=True, transform=transform_train)
+dataset_test = torchvision.datasets.CIFAR10(root=args.base_dir, train=False, download=True, transform=transform_test)
 
 # Setting parameters
 LEARNING_RATE = 1e-3
