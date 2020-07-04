@@ -28,7 +28,7 @@ def calculate_loss_and_accuracy(model, dataset, batch_size, device=None, criteri
   return loss / len(dataloader), correct / len(dataset)
   
 
-def train_model(model_id, dataset_train, dataset_valid, batch_size, model, criterion, optimizer, num_epochs, base_dir, sampler=None, device=None, patience=15):
+def train_model(model_id, dataset_train, dataset_valid, batch_size, model, criterion, optimizer, num_epochs, base_dir, sampler=None, device=None, patience=15, early_stopping=True):
   model.to(device)
 
   # create a dataloader
@@ -101,7 +101,8 @@ def train_model(model_id, dataset_train, dataset_valid, batch_size, model, crite
     #scheduler.step()
     
     # Early Stopping
-    if counter == patience:
-      break
+    if early_stopping:
+      if counter == patience:
+        break
 
   return {'train': log_train, 'valid': log_valid}
