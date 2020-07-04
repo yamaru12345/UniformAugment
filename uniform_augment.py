@@ -86,7 +86,7 @@ class ImageTransform():
     def __init__(self, resize, mean, std, train=True):
         if train:
             self.data_transform = transforms.Compose([
-                transforms.Resize(resize)
+                transforms.Resize(resize),
                 UniformAugment(),
                 transforms.RandomHorizontalFlip(),
                 transforms.ToTensor(),
