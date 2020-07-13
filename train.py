@@ -15,7 +15,7 @@ def calculate_loss_and_accuracy(model, dataset, batch_size, device=None, criteri
       labels = data[1].to(device)
 
       # forward
-      outputs = model.forward(inputs)
+      outputs = model(inputs)
 
       # loss
       if criterion != None:
@@ -63,7 +63,7 @@ def train_model(model_id, dataset_train, dataset_valid, batch_size, model, crite
       # forward + backward + optimize
       inputs = data[0].to(device)
       labels = data[1].to(device)
-      outputs = model.forward(inputs)
+      outputs = model(inputs)
       loss = criterion(outputs, labels)
       loss.backward()
       optimizer.step()
